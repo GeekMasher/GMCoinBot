@@ -6,7 +6,7 @@ GeekMasher's Cryptocurrency Telegram Bot
 
 | Services      | Link                                          |
 |--------------:|:---------------------------------------------:|
-| Telegram      | [tg://resolve?domain=GMCoinBot](tg://resolve?domain=GMCoinBot) |
+| Telegram      | [https://web.telegram.org/#/im?p=@GMCoinBot](https://web.telegram.org/#/im?p=@GMCoinBot) |
 
 
 ## Commands 
@@ -14,7 +14,7 @@ GeekMasher's Cryptocurrency Telegram Bot
 ### v0.1 - Telegram
 
 | Commands      | Arguments         | Description                           |
-|--------------:|:------------------|:-------------------------------------:|
+|--------------:|:------------------|:--------------------------------------|
 | /start        | null              | Welcome message                       |
 | /help         | null              | Help message for users                |
 | /price        | {symbol}          | Display the price from exchange       |
