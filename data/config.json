@@ -1,0 +1,13 @@
+{
+    "ENV": "TESTING",
+
+    "DEFAULT_SYMBOL": "BTC/USD",
+    
+    "API_KEYS": {
+        "telegram": "<INSERT TELEGRAM KEY>",
+        "kraken": {
+            "apiKey": "<INSERT API KEY>",
+            "secret": "<INSERT SECERT>"
+        }
+    }
+}

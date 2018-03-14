@@ -99,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+bin/
+include/
+.vscode/
+testing/
+testing*.*
+data/config.*.json
+pip-selfcheck.json
