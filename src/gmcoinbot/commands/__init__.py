@@ -9,14 +9,16 @@ command_helpers = [
 ]
 
 from gmcoinbot.commands.basics import (
-    cmd_start,
-    cmd_help,
-    cmd_error
+    Start,
+    Help,
+    Error
 )
 from gmcoinbot.commands.price import (
-    cmd_price,
-    cmd_setexchange
+    Price
+)
+from gmcoinbot.commands.set import (
+    SetExchange
 )
 from gmcoinbot.commands.healthcheck import (
-    cmd_healthcheck
+    HealthCheck
 )

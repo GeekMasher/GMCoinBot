@@ -1,20 +1,25 @@
 
-from gmcoinbot import Config
+from gmcoinbot import Config, Command
 
 from logging import getLogger
 
 logger = getLogger(__name__)
 
 
-def cmd_healthcheck(bot, update, chat_data):
-    try:
-        chat = update.effective_chat
+class HealthCheck(Command):
+    __name__ = "healthcheck"
 
-        settings = Config.getChatSettings(chat)
+    @classmethod
+    def telegramHandle(cls, bot, update, chat_data):
+        try:
+            chat = update.effective_chat
+            cls.telegramLogInfo(chat)
 
-        # logger.info(Config.export(export_object=update))
-        logger.info('[{}] - {}'.format(type(chat), chat))
+            settings = Config.getChatSettings(chat)
 
-        update.message.reply_text('Test...')
-    except Exception as err:
-        logger.warning(str(err))
+            cls.telegramLogInfo(chat, str(chat))
+
+            update.message.reply_text('Health check test...')
+
+        except Exception as err:
+            logger.warning(str(err))

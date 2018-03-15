@@ -8,7 +8,7 @@ class Config(gmutils.Config):
 
     DEFAULT_SYMBOL = 'BTC/USD'
 
-    TELEGRAM_GROUPS = {}
+    TELEGRAM_USERS = {}
 
     exchange = ccxt.kraken()
 
@@ -23,9 +23,9 @@ class Config(gmutils.Config):
     def load(cls):
         super(Config, cls).load()
 
-        for user, vals in Config.TELEGRAM_GROUPS.items():
-            ex = Config.TELEGRAM_GROUPS[user].get('exchange').lower()
-            Config.TELEGRAM_GROUPS[user]['exchange'] = getattr(ccxt, ex)()
+        for user, vals in Config.TELEGRAM_USERS.items():
+            ex = Config.TELEGRAM_USERS[user].get('exchange').lower()
+            Config.TELEGRAM_USERS[user]['exchange'] = getattr(ccxt, ex)()
     
     @staticmethod
     def getPrice(symbol='BTC/USD', exchange=None):
@@ -56,29 +56,29 @@ class Config(gmutils.Config):
     def getChatSettings(chat):
         user = chat.title if chat.type == 'group' else chat.username
         
-        if not Config.TELEGRAM_GROUPS.get(user):
-            Config.TELEGRAM_GROUPS[user] = {
+        if not Config.TELEGRAM_USERS.get(user):
+            Config.TELEGRAM_USERS[user] = {
                 'exchange': getattr(ccxt, 'kraken')(),
                 'symbol': 'BTC/USD'
             }
-        return Config.TELEGRAM_GROUPS.get(user)
+        return Config.TELEGRAM_USERS.get(user)
 
     @staticmethod
     def updateChatSettings(chat, exchange=None, symbol=None):
         user = chat.title if chat.type == 'group' else chat.username
 
-        if Config.TELEGRAM_GROUPS.get(user):
+        if Config.TELEGRAM_USERS.get(user):
             if exchange is not None:
-                Config.TELEGRAM_GROUPS[user]['exchange'] = getattr(
+                Config.TELEGRAM_USERS[user]['exchange'] = getattr(
                     ccxt, exchange
                 )()
             if symbol is not None:
-                Config.TELEGRAM_GROUPS[user]['symbol'] = symbol
+                Config.TELEGRAM_USERS[user]['symbol'] = symbol
         
     @staticmethod
     def __export__():
         groups = {}
-        for user, vals in Config.TELEGRAM_GROUPS.items():
+        for user, vals in Config.TELEGRAM_USERS.items():
             groups[user] = {
                 'exchange': vals.get('exchange').name,
                 'symbol': vals.get('symbol'),
@@ -87,7 +87,7 @@ class Config(gmutils.Config):
         ret_val = {
             'API_KEYS': Config.API_KEYS,
             'DEFAULT_SYMBOL': Config.DEFAULT_SYMBOL,
-            'TELEGRAM_GROUPS': groups,
+            'TELEGRAM_USERS': groups,
             'price': Config.price
         }
         return ret_val
