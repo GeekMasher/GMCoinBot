@@ -12,7 +12,7 @@ docker build -t gmcoinbot .
 banner 'Running Docker...'
 docker run \
     -it --rm \
-    --restart
+    --restart \
     --name gmcoinbot \
     --env GMCOINBOT_ENV='PROD' \
     gmcoinbot
