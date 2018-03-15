@@ -1,11 +1,12 @@
 
+import os
 import logging
 
-from gmcoinbot import Config
+from gmcoinbot import Config, __name__
 from gmcoinbot.commands import *
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-
+from telegram.error import InvalidToken
 
 logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -20,7 +21,24 @@ def main():
     """
     Config.initCLI()
 
-    updater = Updater(Config.API_KEYS.get('telegram'))
+    # This will be fixed in new version of GMUtils
+    Config.ENV = os.environ.get(__name__.upper() + '_ENV', 'TESTING')
+    
+    config_file = './data/config.{}.json'.format(Config.ENV.lower())
+    if os.path.exists(config_file):
+        logger.info('Config.load("{}")'.format(config_file))
+        Config.loadFile(config_file)
+
+    config_file = '/etc/{}/config.{}.json'.format(__name__, Config.ENV.lower())
+    if os.path.exists(config_file):
+        logger.info('Config.load("{}")'.format(config_file))
+        Config.loadFile(config_file)
+    
+    try:
+        updater = Updater(Config.API_KEYS.get('telegram'))
+    except InvalidToken:
+        logger.error('Invalid Telegram Token...')
+        return
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
