@@ -27,8 +27,12 @@ def run_telegram():
     dp.add_handler(CommandHandler(
         "price", Price.telegramHandle, pass_args=True
     ))
+    # Set commands
     dp.add_handler(CommandHandler(
         "setexchange", SetExchange.telegramHandle, pass_args=True
+    ))
+    dp.add_handler(CommandHandler(
+        "setsymbol", SetSymbol.telegramHandle, pass_args=True
     ))
 
     dp.add_handler(CommandHandler(

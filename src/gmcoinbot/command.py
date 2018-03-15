@@ -37,14 +37,14 @@ class Command:
 
     @classmethod
     def telegramLogInfo(cls, chat, message=None):
-        message = ' - ' + message if message is not None else ''
+        message = '- ' + message if message is not None else ''
         logger.info("{} :: [{}] {}".format(
             cls.__name__, Command._telegramUsernameFromChat(chat), message
         ))
 
     @classmethod
     def telegramLogWarning(cls, chat, message=None):
-        message = ' - ' + message if message is not None else ''
+        message = '- ' + message if message is not None else ''
         logger.warning("{} :: [{}] {}".format(
             cls.__name__, Command._telegramUsernameFromChat(chat), message
         ))

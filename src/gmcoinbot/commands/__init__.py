@@ -17,7 +17,8 @@ from gmcoinbot.commands.price import (
     Price
 )
 from gmcoinbot.commands.set import (
-    SetExchange
+    SetExchange,
+    SetSymbol
 )
 from gmcoinbot.commands.healthcheck import (
     HealthCheck
