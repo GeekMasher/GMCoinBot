@@ -9,6 +9,10 @@ logger = getLogger(__name__)
 class HealthCheck(Command):
     __name__ = "healthcheck"
 
+    @staticmethod
+    def help():
+        return "/healthcheck - make sure everything is ship-shape!"
+
     @classmethod
     def telegramHandle(cls, bot, update, chat_data):
         try:

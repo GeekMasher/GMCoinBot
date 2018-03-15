@@ -6,6 +6,10 @@ from gmcoinbot import Config, Command, logger
 
 class SetExchange(Command):
 
+    @staticmethod
+    def help():
+        return "/setexchange <exchange> - set the users exchange settings"
+
     @classmethod
     def telegramHandle(cls, bot, update, args):
         chat = update.effective_chat
@@ -34,6 +38,10 @@ class SetExchange(Command):
 
 
 class SetSymbol(Command):
+    
+    @staticmethod
+    def help():
+        return "/setsymbol <symbol> - sets the users symbol settings"
 
     @classmethod
     def telegramHandle(cls, bot, update, args):

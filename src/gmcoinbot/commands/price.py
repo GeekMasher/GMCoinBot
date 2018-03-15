@@ -14,6 +14,11 @@ PRICE_FORMAT = """\
 class Price(Command):
     __name__ = "price"
 
+    @staticmethod
+    def help():
+        return "/price <symbol> - " +
+        "gets the current price of a coin from exchange"
+
     @classmethod
     def telegramHandle(cls, bot, update, args):
         chat = update.effective_chat

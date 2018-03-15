@@ -4,8 +4,9 @@ command_helpers = [
     "/start - welcome message",
     "/help - print list of commands and help descriptions",
     "/healthcheck - make sure everything is ship-shape!",
-    "/setexchange <exchange> - set the exchange",
-    "/price <symbol> - gets the current price of a coin from exchange (Kraken)"
+    "/setexchange <exchange> - set the users exchange settings",
+    "/setsymbol <symbol> - sets the users symbol settings",
+    "/price <symbol> - gets the current price of a coin from exchange"
 ]
 
 from gmcoinbot.commands.basics import (
