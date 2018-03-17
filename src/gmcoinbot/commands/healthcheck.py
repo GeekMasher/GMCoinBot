@@ -1,9 +1,13 @@
 
-from gmcoinbot import Config, Command
+from gmcoinbot import Config, Command, version
 
 from logging import getLogger
 
 logger = getLogger(__name__)
+
+HEALTH_DATA = """\
+GMCoinBot v{version}
+"""
 
 
 class HealthCheck(Command):
@@ -23,7 +27,11 @@ class HealthCheck(Command):
 
             cls.telegramLogInfo(chat, str(chat))
 
-            update.message.reply_text('Health check test...')
+            msg = HEALTH_DATA.format(
+                version=version
+            )
+
+            update.message.reply_text(msg)
 
         except Exception as err:
             logger.warning(str(err))

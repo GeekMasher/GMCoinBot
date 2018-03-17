@@ -1,5 +1,8 @@
 
-from gmcoinbot.__version__ import *
+from gmcoinbot.__version__ import (
+    __banner__, __name__,
+    __version__ as version
+)
 import logging
 
 import logging
