@@ -81,7 +81,7 @@ class Config(gmutils.Config):
 
     @staticmethod
     def checkExchanges(exchange):
-        return exchange in dir(ccxt)
+        return exchange in ccxt.exchanges
 
     @staticmethod
     def getChatSettings(chat):

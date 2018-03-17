@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-__version__ = "0.2.4"
+__version__ = "0.2.5"
 
 __title__ = "GMCoinBot"
 __name__ = "gmcoinbot"
