@@ -1,7 +1,7 @@
 
 import logging
 
-from gmcoinbot import Config
+from gmcoinbot import Config, Command
 
 from ccxt.base.errors import ExchangeError
 
@@ -11,63 +11,50 @@ PRICE_FORMAT = """\
 {symbol} :: {price:<12} ({exchange})\
 """
 
+class Price(Command):
+    __name__ = "price"
 
-def cmd_price(bot, update, args):
-    """
-    """
+    @staticmethod
+    def help():
+        return "/price <symbol> - gets the current price of a coin from exchange"
 
-    try:
+    @classmethod
+    def telegramHandle(cls, bot, update, args):
         chat = update.effective_chat
+        user = cls._telegramUsernameFromChat(chat)
 
-        user = chat.title if chat.type == 'group' else chat.username
-        user_settings = Config.getChatSettings(chat)
-        
-        symbol = args.pop(0) if len(args) == 1 else user_settings.get('symbol')
+        try:
+            user_settings = Config.getChatSettings(chat)
 
-        if Config.checkSymbol(symbol):
-            ex = user_settings.get('exchange')
-            price = Config.getPrice(symbol, ex)
+            symbol = args.pop(0) if len(args) == 1 else user_settings.get('symbol')
 
-            msg = PRICE_FORMAT.format(
-                symbol=symbol,
-                price=price,
-                exchange=ex.name
-            )
+            if Config.checkSymbol(symbol):
+                ex = user_settings.get('exchange')
+                price = Config.getPrice(symbol, ex)
 
-            logger.info('[{}] price :: {}'.format(user, msg))
+                msg = PRICE_FORMAT.format(
+                    symbol=symbol,
+                    price=price,
+                    exchange=ex.name
+                )
+                cls.telegramLogInfo(chat, msg)
 
-            update.message.reply_text(msg)
-        else:
-            update.message.reply_text('Unknown Symbol: {}'.format(symbol))
+                update.message.reply_text(msg)
+            else:
+                msg_err = 'Unknown Symbol: {}'.format(symbol)
+                cls.telegramLogWarning(chat, msg_err)
 
-    except (IndexError, ValueError) as err:
-        update.message.reply_text('Usage: /price <symbol>')
-        logger.warning(str(err))
-        
-        if Config.isTesting():
-            raise err
-    except ExchangeError as err:
-        update.message.reply_text('Error: ' + str(err))
+                update.message.reply_text(msg_err)
 
+        except (IndexError, ValueError) as err:
+            cls.telegramLogWarning(chat, str(err))
+            update.message.reply_text('Usage: /price <symbol>')
 
-def cmd_setexchange(bot, update, args):
-    try:
-        chat = update.effective_chat
-        user = chat.title if chat.type == 'group' else chat.username
+            if Config.isTesting():
+                raise err
+        except ExchangeError as err:
+            cls.telegramLogWarning(chat, str(err))
+            update.message.reply_text('Error: ' + str(err))
 
-        ex = args.pop(0) if len(args) == 1 else 'kraken'
-
-        if Config.checkExchanges(ex.lower()):
-            logger.info('[{}] setexchange :: {}'.format(user, ex))
-
-            Config.updateChatSettings(chat, exchange=ex)
-            
-            update.message.reply_text(
-                'Set `{}` exchange to `{}`'.format(user, ex)
-            )
-        else:
-            update.message.reply_text('Unknown Exchange: {}'.format(ex))
-
-    except Exception as err:
-        update.message.reply_text('Usage: /setexchange <exchange>')
-        logger.warning(str(err))
+            if Config.isTesting():
+                raise err

@@ -11,22 +11,23 @@ GeekMasher's Cryptocurrency Telegram Bot
 
 ## Commands 
 
-### v0.1 - Telegram
+### Telegram - v0.2
 
 | Commands      | Arguments         | Description                           |
 |:--------------|:------------------|:--------------------------------------|
 | /start        | null              | Welcome message                       |
 | /help         | null              | Help message for users                |
-| /price        | {symbol}          | Display the price from exchange       |
-| /setexchange  | {exchange}        | Set exchange for user/group           |
-| /helthcheck   | null              | Displays the health of the server     |
+| /price        | {symbol}          | Display the price from exchange (symbol optional) |
+| /setexchange  | {exchange}        | Sets the users exchange               |
+| /setsymbol    | {symbol}          | Sets the users symbol                 |
+| /healthcheck  | null              | Displays the health of the server     |
 
 
 ## Dependencies
 
 | Dependency                | Link                          |
 |--------------------------:|:------------------------------|
-| gmutils                   | Utility library               |
+| gmutils                   | GeekMasher's Utility library  |
 | python-telegram-bot       | Telegram bot library          |
 | ccxt                      | Crypto exchange library       |
 

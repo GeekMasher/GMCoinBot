@@ -1,20 +1,37 @@
 
-from gmcoinbot import Config
+from gmcoinbot import Config, Command, version
 
 from logging import getLogger
 
 logger = getLogger(__name__)
 
+HEALTH_DATA = """\
+GMCoinBot v{version}
+"""
 
-def cmd_healthcheck(bot, update, chat_data):
-    try:
-        chat = update.effective_chat
 
-        settings = Config.getChatSettings(chat)
+class HealthCheck(Command):
+    __name__ = "healthcheck"
 
-        # logger.info(Config.export(export_object=update))
-        logger.info('[{}] - {}'.format(type(chat), chat))
+    @staticmethod
+    def help():
+        return "/healthcheck - make sure everything is ship-shape!"
 
-        update.message.reply_text('Test...')
-    except Exception as err:
-        logger.warning(str(err))
+    @classmethod
+    def telegramHandle(cls, bot, update, chat_data):
+        try:
+            chat = update.effective_chat
+            cls.telegramLogInfo(chat)
+
+            settings = Config.getChatSettings(chat)
+
+            cls.telegramLogInfo(chat, str(chat))
+
+            msg = HEALTH_DATA.format(
+                version=version
+            )
+
+            update.message.reply_text(msg)
+
+        except Exception as err:
+            logger.warning(str(err))
