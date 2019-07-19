@@ -1,4 +1,6 @@
 # GMCoinBot
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGeekMasher%2FGMCoinBot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FGeekMasher%2FGMCoinBot?ref=badge_shield)
+
 GeekMasher's Cryptocurrency Telegram Bot
 
 
@@ -34,3 +36,6 @@ GeekMasher's Cryptocurrency Telegram Bot
 ## License
 
 GNU GENERAL PUBLIC LICENSE
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGeekMasher%2FGMCoinBot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FGeekMasher%2FGMCoinBot?ref=badge_large)
