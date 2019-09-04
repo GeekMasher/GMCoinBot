@@ -1,6 +1,6 @@
 aiodns==1.1.1
 aiohttp==3.0.1
-async-timeout==2.0.0
+async-timeout==3.0.1
 attrs==17.4.0
 cchardet==2.1.1
 ccxt==1.11.57
