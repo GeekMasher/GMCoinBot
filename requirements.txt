@@ -4,7 +4,7 @@ async-timeout==2.0.0
 attrs==17.4.0
 cchardet==2.1.1
 ccxt==1.11.57
-certifi==2018.1.18
+certifi==2019.6.16
 chardet==3.0.4
 future==0.16.0
 gmutils==0.1.3
